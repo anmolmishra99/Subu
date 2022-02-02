@@ -14,7 +14,8 @@ def setup_kaggle(upload=False):
     uploaded = files.upload()
     for fn in uploaded.keys():
       print(f'User uploaded file "{fn}" with length {len(uploaded[fn])} bytes')
+  if not os.path.exists('/root/.kaggle'):
+    os.mkdir('/root/.kaggle')
   
-  os.mkdir('/root/.kaggle')
   shutil.move("kaggle.json", "/root/.kaggle/kaggle.json")
   os.chmod('/root/.kaggle',600 )
