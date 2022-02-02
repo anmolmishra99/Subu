@@ -1,3 +1,5 @@
+
+##----------------------------------------SETUP_KAGGLE------------------------------------------------
 from google.colab import files
 import os
 import shutil
@@ -19,3 +21,20 @@ def setup_kaggle(upload=False):
   
   shutil.move("kaggle.json", "/root/.kaggle/kaggle.json")
   os.chmod('/root/.kaggle',600 )
+  
+##----------------------------------------UNZIP------------------------------------------------
+import zipfile
+
+def unzip(filepath):
+  """
+  This function unzip a zip file
+
+  Parameters
+  ----------
+  filepath (str): provide filepath you want to extract all data
+  """
+  
+  zip_ref = zipfile.ZipFile(filepath)
+  zip_ref.extractall()
+  zip_ref.close()
+
