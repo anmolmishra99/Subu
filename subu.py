@@ -56,6 +56,7 @@ def walk_through_dir(dir_path):
     
     
 import datetime
+import tensorflow as tf
 
 def create_tensorboard_callback(dir_name, experiment_name):
   """
