@@ -1,6 +1,7 @@
 
 ##----------------------------------------SETUP_KAGGLE------------------------------------------------
 from google.colab import files
+import tensorflow as tf
 import os
 import shutil
 def setup_kaggle(upload=False):
