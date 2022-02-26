@@ -8,3 +8,4 @@
 * <b>create_tensorboard_callback</b> : Creates a TensorBoard callback instand to store log files.
 * <b>plot_loss_curves</b> : Returns separate loss curves for training and validation metrics.
 * <b>compare_historys</b> : Compares two TensorFlow model History objects.
+* <b>calculate_results</b> : Calculates model accuracy, precision, recall and f1 score of a  classification model.
