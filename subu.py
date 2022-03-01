@@ -157,7 +157,7 @@ def compare_historys(original_history, new_history, initial_epochs=5):
  
  # Function to evaluate: accuracy, precision, recall, f1-score
 from sklearn.metrics import accuracy_score, precision_recall_fscore_support 
-def calculate_results(y_true, y_pred):
+def classification_eval_metrices(y_true, y_pred):
   """
   Calculates model accuracy, precision, recall and f1 score of a binary classification model.
 
@@ -176,4 +176,36 @@ def calculate_results(y_true, y_pred):
                   "recall": model_recall,
                   "f1": model_f1}
   return model_results
+
+
+
+def mean_absolute_scaled_error(y_true, y_pred):
+  """
+  Implement MASE 
+  MASE = MAE/MAE(naive)
+  """
+  mae = tf.reduce_mean(tf.abs(y_true- y_pred))
+
+  # Find MAE of naive forecast ############ naive_forecast = y_test[:-1]
+  mae_naiva_no_season = tf.reduce_mean(tf.abs(y_true[1:] - y_true[:-1]))
+  return mae / mae_naiva_no_season
+
+# create a functio to tae in model predictio and truth value and return evaluation metrics
+def regression_eval_metrices(y_true, y_pred):
+  # make sure float32 datatype
+  y_true = tf.cast(y_true, dtype=tf.float32)
+  y_pred = tf.cast(y_pred, dtype=tf.float32)
+
+  # calculate various evaluation ,etrics
+  mae = tf.keras.metrics.mean_absolute_error(y_true, y_pred)
+  mse = tf.keras.metrics.mean_squared_error(y_true, y_pred)
+  rmse = tf.sqrt(mse)
+  mape = tf.keras.metrics.mean_absolute_percentage_error(y_true, y_pred)
+  mase = mean_absolute_scaled_error(y_true, y_pred)
+
+  return {'mae': mae.numpy(),
+          'mse': mse.numpy(),
+          'rmse': rmse.numpy(),
+          'mape': mape.numpy(),
+          'mase': mase.numpy()}
 
